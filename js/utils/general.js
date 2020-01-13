@@ -26,3 +26,7 @@ function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function title(string) {
+  return string.replace(/(^\w{1})|(\s{1}\w{1})/g,
+                        match => match.toUpperCase());
+}
