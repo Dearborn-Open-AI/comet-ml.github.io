@@ -33,7 +33,7 @@ class Table {
       let th = window.document.createElement("th");
       if (typeof this.headers !== "undefined" && key in this.headers)
         key = this.headers[key];
-      key = this.capitalize(key);
+      key = this.title(key);
       key = key.replace(/_/g, " ");
       let text = window.document.createTextNode(key);
       th.appendChild(text);
@@ -46,7 +46,8 @@ class Table {
     div.appendChild(this.table);
   }
 
-  capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  title(string) {
+    return string.replace(/(^\w{1})|(\s{1}\w{1})/g,
+                          match => match.toUpperCase());
   }
 }
