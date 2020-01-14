@@ -7,6 +7,14 @@ function add(a, b) {
   return a + b;
 }
 
+// Calculates the absolute value of a number.
+// @param {[number]} a number
+function abs(a) {
+  if (a < 0)
+    return -a;
+  return a;
+}
+
 // @param {[number]} array Array of numbers.
 function sum(array) {
   return array.reduce(add);

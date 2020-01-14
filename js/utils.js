@@ -1,3 +1,5 @@
+// -*- mode: js; js-indent-level: 2; -*-
+
 function copy(obj) {
   if (!obj || true == obj)
     return obj;
@@ -17,10 +19,14 @@ function copy(obj) {
   return result;
 }
 
-function compare(field, reverse = false) {
+function identity(v) {
+  return v;
+}
+
+function compare(field, reverse = false, func = identity) {
   return function(a, b) {
-    let nameA = a[field];
-    let nameB = b[field];
+    let nameA = func(a[field]);
+    let nameB = func(b[field]);
     if (typeof a[field] === "string" && typeof b[field] === "string") {
       nameA = a[field].toUpperCase();
       nameB = b[field].toUpperCase();
