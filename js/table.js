@@ -1,5 +1,7 @@
+// -*- mode: js; js-indent-level: 2; -*-
+
 class Table {
-  constructor(data, keys, headers) {
+    constructor(data, keys, headers, id = "data-table", className = "data-table") {
     this.data = data;
     this.headers = headers;
     if (typeof keys === "undefined") {
@@ -8,7 +10,8 @@ class Table {
       this.keys = keys;
     }
     this.table = window.document.createElement("table");
-    this.table.id = "data-table";
+    this.table.id = id;
+    this.table.className = className;
     this.generate();
   }
 
