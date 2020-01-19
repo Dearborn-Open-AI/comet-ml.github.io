@@ -1,7 +1,13 @@
 // -*- mode: js; js-indent-level: 2; -*-
 
 class Table {
-    constructor(data, keys, headers, id = "data-table", className = "data-table") {
+  constructor(
+    data,
+    keys,
+    headers,
+    id = "data-table",
+    className = "data-table"
+  ) {
     this.data = data;
     this.headers = headers;
     if (typeof keys === "undefined") {
@@ -24,8 +30,17 @@ class Table {
         let key = this.keys[j];
         let cell = row.insertCell();
         let text = element[key];
-        if (typeof text !== "string") text = JSON.stringify(text);
-        let node = window.document.createTextNode(text);
+        let node = null;
+
+        if (text.nodeType === 1) { // element
+          node = text;
+        } else if (typeof text === "object") {
+          node = window.document.createTextNode(JSON.stringify(text));
+        } else {
+          node = window.document.createTextNode(text);
+        }
+
+        //node = window.document.createTextNode(typeof node);
         cell.appendChild(node);
       }
     }
@@ -50,7 +65,8 @@ class Table {
   }
 
   title(string) {
-    return string.replace(/(^\w{1})|(\s{1}\w{1})/g,
-                          match => match.toUpperCase());
+    return string.replace(/(^\w{1})|(\s{1}\w{1})/g, match =>
+      match.toUpperCase()
+    );
   }
 }
