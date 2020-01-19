@@ -1,14 +1,24 @@
-FILES = $(wildcard js/*.js)
-FILES += $(wildcard css/*.css)
+JAVASCRIPTS = $(wildcard js/*.js)
+STYLESHEETS = $(wildcard css/*.css)
+
+FILES = $(JAVASCRIPTS)
+FILES += $(STYLESHEETS)
 
 MINIFY = $(FILES:%=min/%)
+DOCS = $(JAVASCRIPTS:js/%.js=docs/%.md)
 
-all: $(MINIFY)
+all: $(MINIFY) $(DOCS)
+
+init:
+	mkdir -p min/css
+	mkdir -p min/js
 
 clean:
-	$(RM) -rf min
-	mkdir -p min/js
-	mkdir -p min/css
+	$(RM) -r $(MINIFY)
+	$(RM) -f $(DOCS)
 
 min/%: %
 	minify $< -o $@
+
+docs/%.md: js/%.js
+	jsdoc2md $< > $@

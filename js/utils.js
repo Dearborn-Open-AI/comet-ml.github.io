@@ -1,5 +1,19 @@
 // -*- mode: js; js-indent-level: 2; -*-
 
+/**
+ * Returns a span element with link to item.
+ *
+ * @param {string} text - the text for the URL
+ * @param {string} url - the address for the URL
+ *
+ * @returns {Object} a span node with link as contents
+ *
+ * @example
+ *
+ * > api.makeLink("The Text", "https://company.com/")
+ * <span><a href="https://company.com/">The Text</span>
+ *
+ */
 function makeLink(text, url) {
   let span = document.createElement("span");
   span.innerHTML = text.link(url);
