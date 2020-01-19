@@ -1,5 +1,11 @@
 // -*- mode: js; js-indent-level: 2; -*-
 
+function makeLink(text, url) {
+  let span = document.createElement("span");
+  span.innerHTML = text.link(url);
+  return span;
+}
+
 function copy(obj) {
   if (!obj || true == obj)
     return obj;
