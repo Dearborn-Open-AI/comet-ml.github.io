@@ -8,5 +8,5 @@ function identity(v){return v;}
 function compare(field,reverse=false,func=identity){return function(a,b){let nameA=func(a[field]);let nameB=func(b[field]);if(typeof a[field]==="string"&&typeof b[field]==="string"){nameA=a[field].toUpperCase();nameB=b[field].toUpperCase();}else if(typeof a[field]!==typeof b[field]){nameA=typeof a[field];nameB=typeof b[field];}
 let result=0;if(nameA<nameB){result=-1;}else if(nameA>nameB){result=1;}
 if(reverse)result=result*-1;return result;};}
-function capitalize(string){return string.charAt(0).toUpperCase()+string.slice(1);}
-function title(string){return string.replace(/(^\w{1})|(\s{1}\w{1})/g,match=>match.toUpperCase());}
+function capitalize(text){return text.charAt(0).toUpperCase()+text.slice(1);}
+function title(text){return text.replace(/(^\w{1})|(\s{1}\w{1})/g,match=>match.toUpperCase());}

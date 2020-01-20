@@ -1,5 +1,11 @@
 // -*- mode: js; js-indent-level: 2; -*-
 
+/*
+ *
+ * Some of the following functions are base on:
+ * * https://github.com/agrueneberg/Spearson, Copyright (C) 2012 Alexander Grüneberg, MIT License
+ */
+
 // Calculates the sum of two variables.
 // @param {[number]} a number
 // @param {[number]} b number
@@ -15,11 +21,13 @@ function abs(a) {
   return a;
 }
 
+// Calculates the sum of an array.
 // @param {[number]} array Array of numbers.
 function sum(array) {
   return array.reduce(add);
 }
 
+// Sorts an array of values.
 // @param {[number]} x Array of numbers.
 function sort(x) {
   return x.sort(function(a, b) {
@@ -27,6 +35,7 @@ function sort(x) {
   });
 }
 
+// Rounds a number to n decimal places.
 // @param {number} x Number to round.
 // @param {number} [n] Number of decimal places.
 function round(x, n) {
@@ -34,6 +43,7 @@ function round(x, n) {
   return Math.round(x * Math.pow(10, n)) / Math.pow(10, n);
 }
 
+// Finds the minimum of an array
 // @param {[number]} x Array of numbers.
 function min(x) {
   let min = Infinity;
@@ -45,6 +55,7 @@ function min(x) {
   return min;
 }
 
+// Finds the maximum of an array
 // @param {[number]} x Array of numbers.
 function max(x) {
   let max = -Infinity;
@@ -56,6 +67,7 @@ function max(x) {
   return max;
 }
 
+// Creates an array of values in given range
 // @param {number} start Start value.
 // @param {number} stop Stop value.
 function range(start, stop) {
@@ -67,11 +79,13 @@ function range(start, stop) {
   return range;
 }
 
+// Finds the average (mean) of an array
 // @param {[number]} x Array of numbers.
 function avg(x) {
   return sum(x) / x.length;
 }
 
+// Finds the deviation of an array
 // @param {[number]} x Array of numbers.
 function deviation(x) {
   let xBar = avg(x);
@@ -80,7 +94,7 @@ function deviation(x) {
   });
 }
 
-// Calculates the variance.
+// Calculates the variance of an array
 // @param {[number]} x Array of numbers.
 // @param {boolean} [bias] If true, the biased sample variance is used.
 function variance(x, bias) {
@@ -95,7 +109,7 @@ function variance(x, bias) {
   );
 }
 
-// Calculates the sample standard deviation.
+// Calculates the standard deviation of an array
 // @param {[number]} x Array of numbers.
 // @param {boolean} [bias] If true, the biased sample variance is used.
 function standardDeviation(x, bias) {
@@ -103,6 +117,7 @@ function standardDeviation(x, bias) {
   return Math.sqrt(variance(x, bias));
 }
 
+// Calculates the standardize of an array
 // @param {[number]} x Array of numbers.
 function standardize(x) {
   let sd = standardDeviation(x);
@@ -111,6 +126,7 @@ function standardize(x) {
   });
 }
 
+// Calculates the rank of an array
 // @param {[number]} x Array of numbers.
 function rank(x) {
   // Copy array.
@@ -179,6 +195,7 @@ function spearman(x, y) {
   );
 }
 
+// Calculates the Euclidean distance of an array
 // @param {[number]} x Array of numbers.
 // @param {[number]} y Array of numbers.
 function euclideanDistance(x, y) {
@@ -191,6 +208,9 @@ function euclideanDistance(x, y) {
   );
 }
 
+// Calculates the Manhattan (city) distance of an array
+// @param {[number]} x Array of numbers.
+// @param {[number]} y Array of numbers.
 function manhattanDistance(x, y) {
   return sum(
     x.map(function(xi, i) {
@@ -199,9 +219,9 @@ function manhattanDistance(x, y) {
   );
 }
 
+// Calculates the pairwise distance of an array
 // @param {[[number]]} x Array of array of numbers.
-// @param {(x, y)} distanceMetric Distance metric.
-// TODO: Save memory by throwing away upper or lower triangle and diagonal.
+// @param {(x, y)} distanceMetric Distance metric function
 function pairwiseDistance(x, distanceMetric) {
   let pairwiseDistances, distance, i, j;
   pairwiseDistances = [];
@@ -220,6 +240,7 @@ function pairwiseDistance(x, distanceMetric) {
   return pairwiseDistances;
 }
 
+// Computes a hierarchical clustering of a matrix
 // @param {[[number]]} pairwiseDistances Pairwise distance matrix.
 // @param {string} linkage Linkage criterion.
 // Inspired by Heather Arthur's clusterfck: https://github.com/harthur/clusterfck
