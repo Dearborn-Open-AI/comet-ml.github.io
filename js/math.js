@@ -6,45 +6,57 @@
  * * https://github.com/agrueneberg/Spearson, Copyright (C) 2012 Alexander Grüneberg, MIT License
  */
 
-// Calculates the sum of two variables.
-// @param {[number]} a number
-// @param {[number]} b number
+/**
+ * Calculates the sum of two variables.
+ * @param {number} a number
+ * @param {number} b number
+ **/
 function add(a, b) {
   return a + b;
 }
 
-// Calculates the absolute value of a number.
-// @param {[number]} a number
+/**
+ * Calculates the absolute value of a number.
+ * @param {number} a number
+ **/
 function abs(a) {
   if (a < 0)
     return -a;
   return a;
 }
 
-// Calculates the sum of an array.
-// @param {[number]} array Array of numbers.
+/**
+ * Calculates the sum of an array.
+ * @param {number} array Array of numbers.
+ **/
 function sum(array) {
   return array.reduce(add);
 }
 
-// Sorts an array of values.
-// @param {[number]} x Array of numbers.
+/**
+ * Sorts an array of values.
+ * @param {number} x Array of numbers.
+ **/
 function sort(x) {
   return x.sort(function(a, b) {
     return a - b;
   });
 }
 
-// Rounds a number to n decimal places.
-// @param {number} x Number to round.
-// @param {number} [n] Number of decimal places.
+/**
+ * Rounds a number to n decimal places.
+ * @param {number} x Number to round.
+ * @param {number} n Number of decimal places.
+ **/
 function round(x, n) {
   n = typeof n === "number" ? n : 0;
   return Math.round(x * Math.pow(10, n)) / Math.pow(10, n);
 }
 
-// Finds the minimum of an array
-// @param {[number]} x Array of numbers.
+/**
+ * Finds the minimum of an array
+ * @param {number} x Array of numbers.
+ **/
 function min(x) {
   let min = Infinity;
   x.map(function(xi) {
@@ -55,8 +67,10 @@ function min(x) {
   return min;
 }
 
-// Finds the maximum of an array
-// @param {[number]} x Array of numbers.
+/**
+ * Finds the maximum of an array
+ * @param {number} x Array of numbers.
+ **/
 function max(x) {
   let max = -Infinity;
   x.map(function(xi) {
@@ -67,9 +81,11 @@ function max(x) {
   return max;
 }
 
-// Creates an array of values in given range
-// @param {number} start Start value.
-// @param {number} stop Stop value.
+/**
+ * Creates an array of values in given range
+ * @param {number} start Start value.
+ * @param {number} stop Stop value.
+ **/
 function range(start, stop) {
   let len = stop - start;
   let range = new Array(len);
@@ -79,14 +95,18 @@ function range(start, stop) {
   return range;
 }
 
-// Finds the average (mean) of an array
-// @param {[number]} x Array of numbers.
+/**
+ * Finds the average (mean) of an array
+ * @param {number} x Array of numbers.
+ **/
 function avg(x) {
   return sum(x) / x.length;
 }
 
-// Finds the deviation of an array
-// @param {[number]} x Array of numbers.
+/**
+ * Finds the deviation of an array
+ * @param {number} x Array of numbers.
+ **/
 function deviation(x) {
   let xBar = avg(x);
   return x.map(function(xi) {
@@ -94,9 +114,11 @@ function deviation(x) {
   });
 }
 
-// Calculates the variance of an array
-// @param {[number]} x Array of numbers.
-// @param {boolean} [bias] If true, the biased sample variance is used.
+/**
+ * Calculates the variance of an array
+ * @param {number} x Array of numbers.
+ * @param {boolean} bias If true, the biased sample variance is used.
+ **/
 function variance(x, bias) {
   bias = typeof bias === "boolean" ? bias : false;
   return (
@@ -109,16 +131,20 @@ function variance(x, bias) {
   );
 }
 
-// Calculates the standard deviation of an array
-// @param {[number]} x Array of numbers.
-// @param {boolean} [bias] If true, the biased sample variance is used.
+/**
+ * Calculates the standard deviation of an array
+ * @param {number} x Array of numbers.
+ * @param {boolean} bias If true, the biased sample variance is used.
+ **/
 function standardDeviation(x, bias) {
   bias = typeof bias === "boolean" ? bias : false;
   return Math.sqrt(variance(x, bias));
 }
 
-// Calculates the standardize of an array
-// @param {[number]} x Array of numbers.
+/**
+ * Calculates the standardize of an array
+ * @param {number} x Array of numbers.
+ **/
 function standardize(x) {
   let sd = standardDeviation(x);
   return deviation(x).map(function(xi) {
@@ -126,8 +152,10 @@ function standardize(x) {
   });
 }
 
-// Calculates the rank of an array
-// @param {[number]} x Array of numbers.
+/**
+ * Calculates the rank of an array
+ * @param {number} x Array of numbers.
+ **/
 function rank(x) {
   // Copy array.
   let ranks = x.slice();
@@ -149,9 +177,11 @@ function rank(x) {
   });
 }
 
-// Calculates the Pearson correlation coefficient for two variables.
-// @param {[number]} x Array of numbers.
-// @param {[number]} y Array of numbers.
+/**
+ * Calculates the Pearson correlation coefficient for two variables.
+ * @param {number} x Array of numbers.
+ * @param {number} y Array of numbers.
+ **/
 function pearson(x, y) {
   x = standardize(x);
   y = standardize(y);
@@ -165,9 +195,11 @@ function pearson(x, y) {
   );
 }
 
-// Calculates the Spearman correlation coefficient for two variables.
-// @param {[number]} x Array of numbers.
-// @param {[number]} y Array of numbers.
+/**
+ * Calculates the Spearman correlation coefficient for two variables.
+ * @param {number} x Array of numbers.
+ * @param {number} y Array of numbers.
+ **/
 function spearman(x, y) {
   let xDeviation, yDeviation;
   x = rank(x);
@@ -195,9 +227,11 @@ function spearman(x, y) {
   );
 }
 
-// Calculates the Euclidean distance of an array
-// @param {[number]} x Array of numbers.
-// @param {[number]} y Array of numbers.
+/**
+ * Calculates the Euclidean distance of an array
+ * @param {number} x Array of numbers.
+ * @param {number} y Array of numbers.
+ **/
 function euclideanDistance(x, y) {
   return Math.sqrt(
     sum(
@@ -208,9 +242,11 @@ function euclideanDistance(x, y) {
   );
 }
 
-// Calculates the Manhattan (city) distance of an array
-// @param {[number]} x Array of numbers.
-// @param {[number]} y Array of numbers.
+/**
+ * Calculates the Manhattan (city) distance of an array
+ * @param {number} x Array of numbers.
+ * @param {number} y Array of numbers.
+ **/
 function manhattanDistance(x, y) {
   return sum(
     x.map(function(xi, i) {
@@ -219,9 +255,11 @@ function manhattanDistance(x, y) {
   );
 }
 
-// Calculates the pairwise distance of an array
-// @param {[[number]]} x Array of array of numbers.
-// @param {(x, y)} distanceMetric Distance metric function
+/**
+ * Calculates the pairwise distance of an array
+ * @param {number} x Array of array of numbers.
+ * @param {function} distanceMetric Distance metric function
+ **/
 function pairwiseDistance(x, distanceMetric) {
   let pairwiseDistances, distance, i, j;
   pairwiseDistances = [];
@@ -240,10 +278,12 @@ function pairwiseDistance(x, distanceMetric) {
   return pairwiseDistances;
 }
 
-// Computes a hierarchical clustering of a matrix
-// @param {[[number]]} pairwiseDistances Pairwise distance matrix.
-// @param {string} linkage Linkage criterion.
-// Inspired by Heather Arthur's clusterfck: https://github.com/harthur/clusterfck
+/**
+ * Computes a hierarchical clustering of a matrix
+ * @param {number} pairwiseDistances Pairwise distance matrix.
+ * @param {string} linkage Linkage criterion.
+ * Inspired by Heather Arthur's clusterfck: https://github.com/harthur/clusterfck
+ **/
 function hierarchicalClustering(pairwiseDistances, linkage) {
   let clusters,
     minDistance,
