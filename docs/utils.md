@@ -19,6 +19,18 @@
 <dt><a href="#title">title(text)</a> ⇒ <code>string</code></dt>
 <dd><p>Returns a string with first letter of every word capitalized</p>
 </dd>
+<dt><a href="#format">format(date, mask, utc)</a> ⇒ <code>string</code></dt>
+<dd><p>Formats a Date object as a string.</p>
+<p>Date Format 1.2.3
+(c) 2007-2009 Steven Levithan &lt;stevenlevithan.com&gt;
+MIT license</p>
+<p>Includes enhancements by Scott Trenda &lt;scott.trenda.net&gt;
+and Kris Kowal &lt;cixar.com/~kris.kowal/&gt;</p>
+<p>Accepts a date, a mask, or a date and a mask.
+Returns a formatted version of the given date.
+The date defaults to the current date/time.
+The mask defaults to dateFormat.masks.default.</p>
+</dd>
 </dl>
 
 <a name="makeLink"></a>
@@ -129,4 +141,35 @@ Returns a string with first letter of every word capitalized
 ```js
 > capitalized("some text");
 "Some Text"
+```
+<a name="format"></a>
+
+## format(date, mask, utc) ⇒ <code>string</code>
+Formats a Date object as a string.
+
+Date Format 1.2.3
+(c) 2007-2009 Steven Levithan <stevenlevithan.com>
+MIT license
+
+Includes enhancements by Scott Trenda <scott.trenda.net>
+and Kris Kowal <cixar.com/~kris.kowal/>
+
+Accepts a date, a mask, or a date and a mask.
+Returns a formatted version of the given date.
+The date defaults to the current date/time.
+The mask defaults to dateFormat.masks.default.
+
+**Kind**: global function  
+**Returns**: <code>string</code> - the data as a string format  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| date | <code>Date</code> | instance |
+| mask | <code>string</code> |  |
+| utc | <code>string</code> |  |
+
+**Example**  
+```js
+> new Date().format("HH:MM:ss")
+"23:30:56"
 ```
