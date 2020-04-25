@@ -22,7 +22,7 @@
 <dt><a href="#max">max(x)</a></dt>
 <dd><p>Finds the maximum of an array</p>
 </dd>
-<dt><a href="#range">range(start, stop)</a></dt>
+<dt><a href="#range">range(start, stop, step)</a></dt>
 <dd><p>Creates an array of values in given range</p>
 </dd>
 <dt><a href="#avg">avg(x)</a></dt>
@@ -144,7 +144,7 @@ Finds the maximum of an array
 
 <a name="range"></a>
 
-## range(start, stop)
+## range(start, stop, step)
 Creates an array of values in given range
 
 **Kind**: global function  
@@ -153,6 +153,7 @@ Creates an array of values in given range
 | --- | --- | --- |
 | start | <code>number</code> | Start value. |
 | stop | <code>number</code> | Stop value. |
+| step | <code>number</code> | Step value. |
 
 <a name="avg"></a>
 

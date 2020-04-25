@@ -6,8 +6,9 @@ function sort(x){return x.sort(function(a,b){return a-b;});}
 function round(x,n){n=typeof n==="number"?n:0;return Math.round(x*Math.pow(10,n))/Math.pow(10,n);}
 function min(x){let min=Infinity;x.map(function(xi){if(xi<min){min=xi;}});return min;}
 function max(x){let max=-Infinity;x.map(function(xi){if(xi>max){max=xi;}});return max;}
-function range(start,stop){let len=stop-start;let range=new Array(len);for(let idx=0;idx<len;idx++){range[idx]=start++;}
-return range;}
+function range(start,stop,step){if(typeof stop==="undefined"){stop=start;start=0.0;}
+if(typeof step==="undefined"){step=1.0;}
+return Array.from((function*(){let current=start;while(current<stop){yield current;current+=step;}})());}
 function avg(x){return sum(x)/x.length;}
 function deviation(x){let xBar=avg(x);return x.map(function(xi){return xi-xBar;});}
 function variance(x,bias){bias=typeof bias==="boolean"?bias:false;return(sum(deviation(x).map(function(xi){return Math.pow(xi,2);}))/(x.length-(bias===false?1:0)));}

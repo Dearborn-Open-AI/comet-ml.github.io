@@ -85,14 +85,25 @@ function max(x) {
  * Creates an array of values in given range
  * @param {number} start Start value.
  * @param {number} stop Stop value.
+ * @param {number} step Step value.
  **/
-function range(start, stop) {
-  let len = stop - start;
-  let range = new Array(len);
-  for (let idx = 0; idx < len; idx++) {
-    range[idx] = start++;
+function range(start, stop, step) {
+  if (typeof stop === "undefined") {
+    stop = start;
+    start = 0.0;
   }
-  return range;
+  if (typeof step === "undefined") {
+    step = 1.0;
+  }
+  return Array.from(
+    (function*() {
+      let current = start;
+      while (current < stop) {
+        yield current;
+        current += step;
+      }
+    })()
+  );
 }
 
 /**
