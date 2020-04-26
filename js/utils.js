@@ -6,7 +6,7 @@ class Histogram {
    * distributed buckets.
    * @param {JSON} hist - A histogram in JSON format
    */
-   constructor(hist) {
+  constructor(hist) {
     // Create from the hist JSON
     this.step = hist.step;
     this.values = this.createValues(
@@ -20,6 +20,30 @@ class Histogram {
     for (let index_count of hist.histogram.index_values) {
       this.counts[index_count[0]] = index_count[1];
     }
+  }
+
+  /**
+   * Get min and max values for defaults.
+   */
+  getMinMax() {
+    let min = null, max = null;
+    for (let i=0; i < this.counts; i++) {
+      if (this.counts[i] > 0) {
+	min = this.values[i - 1];
+	break;
+      }
+    }
+    for (let i = this.counts - 1; i <= 0; i--) {
+      if (this.counts[i] > 0) {
+	max = this.values[i + 1];
+	break;
+      }
+    }
+    if (min === null && max === null) {
+      min = -1.0;
+      max =  1.0;
+    }
+    return [min, max];
   }
 
   /**

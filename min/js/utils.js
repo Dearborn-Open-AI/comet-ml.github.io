@@ -1,4 +1,8 @@
 class Histogram{constructor(hist){this.step=hist.step;this.values=this.createValues(hist.histogram.start,hist.histogram.stop,hist.histogram.step,hist.histogram.offset);this.counts=Array.from({length:this.values.length}).fill(0);for(let index_count of hist.histogram.index_values){this.counts[index_count[0]]=index_count[1];}}
+getMinMax(){let min=null,max=null;for(let i=0;i<this.counts;i++){if(this.counts[i]>0){min=this.values[i-1];break;}}
+for(let i=this.counts-1;i<=0;i--){if(this.counts[i]>0){max=this.values[i+1];break;}}
+if(min===null&&max===null){min=-1.0;max=1.0;}
+return[min,max];}
 createValues(start,stop,step,offset){let values=[-Infinity,offset,Infinity];let value=start;while(value<=stop){values.splice(1,0,offset-value);values.splice(values.length-1,0,offset+value);value*=step;}
 return values;}
 getBinIndex(value){if(value==Infinity){return this.values.length-1;}else{return this.binarySearch(value,0,this.values.length-1);}}

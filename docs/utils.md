@@ -47,6 +47,7 @@ The mask defaults to dateFormat.masks.default.</p>
 
 * [Histogram](#Histogram)
     * [new Histogram(hist)](#new_Histogram_new)
+    * [.getMinMax()](#Histogram+getMinMax)
     * [.createValues(start, stop, step, offset)](#Histogram+createValues)
     * [.getBinIndex(value)](#Histogram+getBinIndex)
     * [.binarySearch(value, low, high)](#Histogram+binarySearch)
@@ -63,6 +64,12 @@ distributed buckets.
 | --- | --- | --- |
 | hist | <code>JSON</code> | A histogram in JSON format |
 
+<a name="Histogram+getMinMax"></a>
+
+### histogram.getMinMax()
+Get min and max values for defaults.
+
+**Kind**: instance method of [<code>Histogram</code>](#Histogram)  
 <a name="Histogram+createValues"></a>
 
 ### histogram.createValues(start, stop, step, offset)
