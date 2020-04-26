@@ -1,3 +1,10 @@
+## Classes
+
+<dl>
+<dt><a href="#Histogram">Histogram</a></dt>
+<dd></dd>
+</dl>
+
 ## Functions
 
 <dl>
@@ -32,6 +39,80 @@ The date defaults to the current date/time.
 The mask defaults to dateFormat.masks.default.</p>
 </dd>
 </dl>
+
+<a name="Histogram"></a>
+
+## Histogram
+**Kind**: global class  
+
+* [Histogram](#Histogram)
+    * [new Histogram(hist)](#new_Histogram_new)
+    * [.createValues(start, stop, step, offset)](#Histogram+createValues)
+    * [.getBinIndex(value)](#Histogram+getBinIndex)
+    * [.binarySearch(value, low, high)](#Histogram+binarySearch)
+    * [.getCounts(min_value, max_value, span_value)](#Histogram+getCounts)
+
+<a name="new_Histogram_new"></a>
+
+### new Histogram(hist)
+Create a histogram. Data is stored in exponentially
+distributed buckets.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| hist | <code>JSON</code> | A histogram in JSON format |
+
+<a name="Histogram+createValues"></a>
+
+### histogram.createValues(start, stop, step, offset)
+Create the values for each bucket.
+
+**Kind**: instance method of [<code>Histogram</code>](#Histogram)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| start | <code>number</code> | the starting range |
+| stop | <code>number</code> | the stoping range |
+| step | <code>number</code> | the step to increment, in percent |
+| offset | <code>number</code> | the offset, usually zero |
+
+<a name="Histogram+getBinIndex"></a>
+
+### histogram.getBinIndex(value)
+Get the bucket index.
+
+**Kind**: instance method of [<code>Histogram</code>](#Histogram)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| value | <code>number</code> | get the bucket index of value |
+
+<a name="Histogram+binarySearch"></a>
+
+### histogram.binarySearch(value, low, high)
+Find the value's bucket using binary search.
+
+**Kind**: instance method of [<code>Histogram</code>](#Histogram)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| value | <code>number</code> | the value to lookup |
+| low | <code>number</code> | the lowest value |
+| high | <code>number</code> | the highest value |
+
+<a name="Histogram+getCounts"></a>
+
+### histogram.getCounts(min_value, max_value, span_value)
+Compute the counts for each span.
+
+**Kind**: instance method of [<code>Histogram</code>](#Histogram)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| min_value | <code>number</code> | the starting value |
+| max_value | <code>number</code> | the stoping value |
+| span_value | <code>number</code> | the step to increment, in value |
 
 <a name="makeLink"></a>
 

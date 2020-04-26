@@ -28,6 +28,9 @@
 <dt><a href="#avg">avg(x)</a></dt>
 <dd><p>Finds the average (mean) of an array</p>
 </dd>
+<dt><a href="#transpose">transpose(matrix)</a></dt>
+<dd><p>Computes the transpose of a matrix</p>
+</dd>
 <dt><a href="#deviation">deviation(x)</a></dt>
 <dd><p>Finds the deviation of an array</p>
 </dd>
@@ -165,6 +168,17 @@ Finds the average (mean) of an array
 | Param | Type | Description |
 | --- | --- | --- |
 | x | <code>number</code> | Array of numbers. |
+
+<a name="transpose"></a>
+
+## transpose(matrix)
+Computes the transpose of a matrix
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| matrix | <code>Array</code> | the matrix to transpose |
 
 <a name="deviation"></a>
 

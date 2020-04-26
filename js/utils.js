@@ -1,5 +1,116 @@
 // -*- mode: js; js-indent-level: 2; -*-
 
+class Histogram {
+  /**
+   * Create a histogram. Data is stored in exponentially
+   * distributed buckets.
+   * @param {JSON} hist - A histogram in JSON format
+   */
+   constructor(hist) {
+    // Create from the hist JSON
+    this.step = hist.step;
+    this.values = this.createValues(
+      hist.histogram.start,
+      hist.histogram.stop,
+      hist.histogram.step,
+      hist.histogram.offset
+    );
+    // Create the counts
+    this.counts = Array.from({ length: this.values.length }).fill(0);
+    for (let index_count of hist.histogram.index_values) {
+      this.counts[index_count[0]] = index_count[1];
+    }
+  }
+
+  /**
+   * Create the values for each bucket.
+   * @param {number} start - the starting range
+   * @param {number} stop - the stoping range
+   * @param {number} step - the step to increment, in percent
+   * @param {number} offset - the offset, usually zero
+   */
+  createValues(start, stop, step, offset) {
+    let values = [-Infinity, offset, Infinity];
+    let value = start;
+    while (value <= stop) {
+      values.splice(1, 0, offset - value);
+      values.splice(values.length - 1, 0, offset + value);
+      value *= step;
+    }
+    return values;
+  }
+
+  /**
+   * Get the bucket index.
+   * @param {number} value - get the bucket index of value
+   */
+  getBinIndex(value) {
+    if (value == Infinity) {
+      return this.values.length - 1;
+    } else {
+      return this.binarySearch(value, 0, this.values.length - 1);
+    }
+  }
+
+  /**
+   * Find the value's bucket using binary search.
+   * @param {number} value - the value to lookup
+   * @param {number} low - the lowest value
+   * @param {number} high - the highest value
+   */
+  binarySearch(value, low, high) {
+    while (true) {
+      let middle = Math.floor((high + low) / 2);
+      if (high - low <= 1) {
+        return low;
+      } else if (value < this.values[middle]) {
+        high = middle;
+      } else {
+        low = middle;
+      }
+    }
+  }
+
+  /**
+   * Compute the counts for each span.
+   * @param {number} min_value - the starting value
+   * @param {number} max_value - the stoping value
+   * @param {number} span_value - the step to increment, in value
+   */
+  getCounts(min_value, max_value, span_value) {
+    const results = [];
+    let bucketPos = 0;
+    let binLeft = min_value;
+    while (binLeft < max_value) {
+      let binRight = binLeft + span_value;
+      let count = 0.0;
+      // Don't include last as bucketLeft, which is infinity:
+      while (bucketPos < this.values.length - 1) {
+        let bucketLeft = this.values[bucketPos];
+        let bucketRight = Math.min(max_value, this.values[bucketPos + 1]);
+        let intersect =
+          Math.min(bucketRight, binRight) - Math.max(bucketLeft, binLeft);
+
+        if (intersect > 0) {
+          if (bucketLeft == Infinity) {
+            count += this.counts[bucketPos];
+          } else {
+            count +=
+              (intersect / (bucketRight - bucketLeft)) * this.counts[bucketPos];
+          }
+        }
+        if (bucketRight > binRight) {
+          break;
+        }
+        bucketPos += 1;
+      }
+      results.push(count);
+      binLeft += span_value;
+    }
+    return results;
+  }
+}
+
 /**
  * Returns a span element with link to item.
  *

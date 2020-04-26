@@ -1,3 +1,13 @@
+class Histogram{constructor(hist){this.step=hist.step;this.values=this.createValues(hist.histogram.start,hist.histogram.stop,hist.histogram.step,hist.histogram.offset);this.counts=Array.from({length:this.values.length}).fill(0);for(let index_count of hist.histogram.index_values){this.counts[index_count[0]]=index_count[1];}}
+createValues(start,stop,step,offset){let values=[-Infinity,offset,Infinity];let value=start;while(value<=stop){values.splice(1,0,offset-value);values.splice(values.length-1,0,offset+value);value*=step;}
+return values;}
+getBinIndex(value){if(value==Infinity){return this.values.length-1;}else{return this.binarySearch(value,0,this.values.length-1);}}
+binarySearch(value,low,high){while(true){let middle=Math.floor((high+low)/2);if(high-low<=1){return low;}else if(value<this.values[middle]){high=middle;}else{low=middle;}}}
+getCounts(min_value,max_value,span_value){const results=[];let bucketPos=0;let binLeft=min_value;while(binLeft<max_value){let binRight=binLeft+span_value;let count=0.0;while(bucketPos<this.values.length-1){let bucketLeft=this.values[bucketPos];let bucketRight=Math.min(max_value,this.values[bucketPos+1]);let intersect=Math.min(bucketRight,binRight)-Math.max(bucketLeft,binLeft);if(intersect>0){if(bucketLeft==Infinity){count+=this.counts[bucketPos];}else{count+=(intersect/(bucketRight-bucketLeft))*this.counts[bucketPos];}}
+if(bucketRight>binRight){break;}
+bucketPos+=1;}
+results.push(count);binLeft+=span_value;}
+return results;}}
 function makeLink(text,url){let span=document.createElement("span");span.innerHTML=text.link(url);return span;}
 function copy(obj){if(!obj||true==obj)
 return obj;let objType=typeof obj;if("number"==objType||"string"==objType)

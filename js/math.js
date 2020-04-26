@@ -114,6 +114,16 @@ function avg(x) {
   return sum(x) / x.length;
 }
 
+
+/**
+ * Computes the transpose of a matrix
+ * @param {Array} matrix the matrix to transpose
+ **/
+function transpose(matrix) {
+  return matrix[0].map((col, i) => matrix.map(row => row[i]));
+}
+
+
 /**
  * Finds the deviation of an array
  * @param {number} x Array of numbers.
