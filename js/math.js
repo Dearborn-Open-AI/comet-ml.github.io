@@ -44,6 +44,25 @@ function sort(x) {
 }
 
 /**
+ * Returns a number in exponential format.
+ *
+ * @param {number} number - the number to format
+ *
+ * @example
+ *
+ * > scientificNotation(0.00002)
+ * "2.0000e-5"
+ *
+ */
+function scientificNotation(number) {
+  const parsedNumber = parseFloat(number);
+
+  return ((parsedNumber <= 1e-3)
+	  ? parsedNumber.toExponential(4)
+	  : round(parsedNumber, 3));
+}
+
+/**
  * Rounds a number to n decimal places.
  * @param {number} x Number to round.
  * @param {number} n Number of decimal places.

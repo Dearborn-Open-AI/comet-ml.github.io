@@ -3,6 +3,7 @@ function abs(a){if(a<0)
 return-a;return a;}
 function sum(array){return array.reduce(add);}
 function sort(x){return x.sort(function(a,b){return a-b;});}
+function scientificNotation(number){const parsedNumber=parseFloat(number);return((parsedNumber<=1e-3)?parsedNumber.toExponential(4):round(parsedNumber,3));}
 function round(x,n){n=typeof n==="number"?n:0;return Math.round(x*Math.pow(10,n))/Math.pow(10,n);}
 function min(x){let min=Infinity;x.map(function(xi){if(xi<min){min=xi;}});return min;}
 function max(x){let max=-Infinity;x.map(function(xi){if(xi>max){max=xi;}});return max;}

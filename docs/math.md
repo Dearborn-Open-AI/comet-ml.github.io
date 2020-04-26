@@ -13,6 +13,9 @@
 <dt><a href="#sort">sort(x)</a></dt>
 <dd><p>Sorts an array of values.</p>
 </dd>
+<dt><a href="#scientificNotation">scientificNotation(number)</a></dt>
+<dd><p>Returns a number in exponential format.</p>
+</dd>
 <dt><a href="#round">round(x, n)</a></dt>
 <dd><p>Rounds a number to n decimal places.</p>
 </dd>
@@ -111,6 +114,22 @@ Sorts an array of values.
 | --- | --- | --- |
 | x | <code>number</code> | Array of numbers. |
 
+<a name="scientificNotation"></a>
+
+## scientificNotation(number)
+Returns a number in exponential format.
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| number | <code>number</code> | the number to format |
+
+**Example**  
+```js
+> scientificNotation(0.00002)
+"2.0000e-5"
+```
 <a name="round"></a>
 
 ## round(x, n)
