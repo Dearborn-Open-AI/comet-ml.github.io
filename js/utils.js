@@ -26,14 +26,15 @@ class Histogram {
    * Get min and max values for defaults.
    */
   getMinMax() {
-    let min = null, max = null;
-    for (let i=0; i < this.counts; i++) {
+    let min = null,
+	max = null;
+    for (let i = 0; i < this.counts.length; i++) {
       if (this.counts[i] > 0) {
 	min = this.values[i - 1];
 	break;
       }
     }
-    for (let i = this.counts - 1; i <= 0; i--) {
+    for (let i = this.counts.length - 1; i >= 0; i--) {
       if (this.counts[i] > 0) {
 	max = this.values[i + 1];
 	break;
@@ -41,7 +42,7 @@ class Histogram {
     }
     if (min === null && max === null) {
       min = -1.0;
-      max =  1.0;
+      max = 1.0;
     }
     return [min, max];
   }
