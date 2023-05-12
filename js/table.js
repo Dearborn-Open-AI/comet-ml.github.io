@@ -54,7 +54,7 @@ class Table {
         let text = element[key];
         let node = null;
 
-        if (text.nodeType === 1) { // element
+        if (text && text.nodeType === 1) { // element
           node = text;
         } else if (typeof text === "object") {
           node = window.document.createTextNode(JSON.stringify(text));
